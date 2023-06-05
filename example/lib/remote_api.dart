@@ -35,8 +35,7 @@ class NoConnectionException implements Exception {}
 
 // ignore: avoid_classes_with_only_static_members
 class _ApiUrlBuilder {
-  static const _baseUrl = 'https://www.breakingbadapi.com/api/';
-  static const _charactersResource = 'characters/';
+  static const _baseUrl = 'https://api.thecatapi.com/v1/images/search';
 
   static Uri characterList(
     int offset,
@@ -44,16 +43,13 @@ class _ApiUrlBuilder {
     String? searchTerm,
   }) =>
       Uri.parse(
-        '$_baseUrl$_charactersResource?'
-        'offset=$offset'
-        '&limit=$limit'
-        '${_buildSearchTermQuery(searchTerm)}',
+        '$_baseUrl?'
+        'page=$offset'
+        '&limit=$limit',
       );
 
   static String _buildSearchTermQuery(String? searchTerm) =>
-      searchTerm != null && searchTerm.isNotEmpty
-          ? '&name=${searchTerm.replaceAll(' ', '+').toLowerCase()}'
-          : '';
+      searchTerm != null && searchTerm.isNotEmpty ? '&name=${searchTerm.replaceAll(' ', '+').toLowerCase()}' : '';
 }
 
 extension on Future<http.Response> {
