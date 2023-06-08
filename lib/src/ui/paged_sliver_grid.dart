@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:infinite_scroll_pagination/src/core/paged_child_builder_delegate.dart';
 import 'package:infinite_scroll_pagination/src/core/paging_controller.dart';
@@ -25,6 +26,9 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
     this.showNewPageErrorIndicatorAsGridChild = true,
     this.showNoMoreItemsIndicatorAsGridChild = true,
     this.shrinkWrapFirstPageIndicators = false,
+    this.showBannerBetweenGridItems = false,
+    this.bannerFrequency = 0,
+    this.bannerBuilder,
     Key? key,
   }) : super(key: key);
 
@@ -67,9 +71,17 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
   /// Corresponds to [PagedSliverBuilder.shrinkWrapFirstPageIndicators].
   final bool shrinkWrapFirstPageIndicators;
 
+  /// Whether to show a banner between grid items.
+  final bool showBannerBetweenGridItems;
+
+  /// Show a banner between grid items.
+  final WidgetBuilder? bannerBuilder;
+
+  /// The frequency of the banner.
+  final int bannerFrequency;
+
   @override
-  Widget build(BuildContext context) =>
-      PagedSliverBuilder<PageKeyType, ItemType>(
+  Widget build(BuildContext context) => PagedSliverBuilder<PageKeyType, ItemType>(
         pagingController: pagingController,
         builderDelegate: builderDelegate,
         completedListingBuilder: (
@@ -87,6 +99,9 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addSemanticIndexes: addSemanticIndexes,
           addRepaintBoundaries: addRepaintBoundaries,
+          showBannerBetweenGridItems: showBannerBetweenGridItems,
+          bannerFrequency: bannerFrequency,
+          bannerBuilder: bannerBuilder,
         ),
         loadingListingBuilder: (
           context,
@@ -134,6 +149,9 @@ class _AppendedSliverGrid extends StatelessWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
+    this.showBannerBetweenGridItems = false,
+    this.bannerFrequency = 0,
+    this.bannerBuilder,
     Key? key,
   }) : super(key: key);
 
@@ -145,9 +163,16 @@ class _AppendedSliverGrid extends StatelessWidget {
   final bool addAutomaticKeepAlives;
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
+  final bool showBannerBetweenGridItems;
+  final WidgetBuilder? bannerBuilder;
+  final int bannerFrequency;
 
   @override
   Widget build(BuildContext context) {
+    if (showBannerBetweenGridItems) {
+      return _buildShowBannerBetweenGridView(context);
+    }
+
     if (showAppendixAsGridChild == true || appendixBuilder == null) {
       return SliverGrid(
         gridDelegate: gridDelegate,
@@ -168,12 +193,39 @@ class _AppendedSliverGrid extends StatelessWidget {
     }
   }
 
+  Widget _buildShowBannerBetweenGridView(BuildContext context) {
+    final items = List<int>.generate(itemCount, (i) => i + 1);
+    final widgets = <Widget>[];
+
+    for (var i = 0; i < itemCount; i += bannerFrequency) {
+      final endIndex = (i + bannerFrequency < itemCount) ? i + bannerFrequency : itemCount;
+      final subList = items.sublist(i, endIndex);
+      widgets.add(
+        SliverGrid(
+          gridDelegate: gridDelegate,
+          delegate: _buildSliverDelegate(
+            count: subList.length,
+            builder: (context, index) => itemBuilder(context, index + i),
+          ),
+        ),
+      );
+      final bannerWidget = bannerBuilder;
+      if (bannerWidget != null) {
+        widgets.add(SliverToBoxAdapter(child: bannerWidget(context)));
+      }
+    }
+
+    return MultiSliver(children: widgets);
+  }
+
   SliverChildBuilderDelegate _buildSliverDelegate({
+    IndexedWidgetBuilder? builder,
     WidgetBuilder? appendixBuilder,
+    int? count,
   }) =>
       AppendedSliverChildBuilderDelegate(
-        builder: itemBuilder,
-        childCount: itemCount,
+        builder: builder ?? itemBuilder,
+        childCount: count ?? itemCount,
         appendixBuilder: appendixBuilder,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addRepaintBoundaries: addRepaintBoundaries,

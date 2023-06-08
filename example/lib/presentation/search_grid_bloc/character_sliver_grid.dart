@@ -61,8 +61,24 @@ class _CharacterSliverGridState extends State<CharacterSliverGrid> {
                 character: item,
               ),
             ),
+            bannerFrequency: 3,
+            bannerBuilder: _buildBannerWidget,
+            showBannerBetweenGridItems: true,
           ),
         ],
+      );
+
+  Widget _buildBannerWidget(BuildContext context) => Container(
+        height: 100,
+        color: Colors.yellow,
+        alignment: Alignment.center,
+        child: const Text(
+          'Banner',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       );
 
   @override
