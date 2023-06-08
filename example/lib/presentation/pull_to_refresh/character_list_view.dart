@@ -12,8 +12,7 @@ class CharacterListView extends StatefulWidget {
 class _CharacterListViewState extends State<CharacterListView> {
   static const _pageSize = 20;
 
-  final PagingController<int, CharacterSummary> _pagingController =
-      PagingController(firstPageKey: 0);
+  final PagingController<int, CharacterSummary> _pagingController = PagingController(firstPageKey: 0);
 
   @override
   void initState() {
@@ -44,15 +43,36 @@ class _CharacterListViewState extends State<CharacterListView> {
         onRefresh: () => Future.sync(
           () => _pagingController.refresh(),
         ),
-        child: PagedListView<int, CharacterSummary>.separated(
-          pagingController: _pagingController,
-          builderDelegate: PagedChildBuilderDelegate<CharacterSummary>(
-            animateTransitions: true,
-            itemBuilder: (context, item, index) => CharacterListItem(
-              character: item,
+        child: CustomScrollView(slivers: [
+          PagedSliverList<int, CharacterSummary>.separated(
+            pagingController: _pagingController,
+            builderDelegate: PagedChildBuilderDelegate<CharacterSummary>(
+              animateTransitions: true,
+              itemBuilder: (context, item, index) => CharacterListItem(
+                character: item,
+              ),
             ),
+            separatorBuilder: (context, index) => const Divider(),
+            bannerFrequency: 3,
+            bannerWidgets: [
+              _buildBannerWidget(context, color: Colors.yellow),
+              _buildBannerWidget(context, color: Colors.blue),
+            ],
+            showBannerBetweenListItems: true,
           ),
-          separatorBuilder: (context, index) => const Divider(),
+        ]),
+      );
+
+  Widget _buildBannerWidget(BuildContext context, {required Color color}) => Container(
+        height: 50,
+        color: color,
+        alignment: Alignment.center,
+        child: const Text(
+          'Banner',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       );
 

@@ -170,7 +170,7 @@ class _AppendedSliverGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (showBannerBetweenGridItems) {
-      return _buildBannerGridViewWithBanners(context);
+      return _buildMultipleGridViewWithBanner(context);
     }
 
     if (showAppendixAsGridChild == true || appendixBuilder == null) {
@@ -193,7 +193,7 @@ class _AppendedSliverGrid extends StatelessWidget {
     }
   }
 
-  Widget _buildBannerGridViewWithBanners(BuildContext context) {
+  Widget _buildMultipleGridViewWithBanner(BuildContext context) {
     final items = List<int>.generate(itemCount, (i) => i + 1);
     final slivers = <Widget>[];
     final banners = bannerWidgets ?? [];
