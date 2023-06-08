@@ -15,8 +15,7 @@ class CharacterSliverGrid extends StatefulWidget {
 
 class _CharacterSliverGridState extends State<CharacterSliverGrid> {
   final CharacterSliverGridBloc _bloc = CharacterSliverGridBloc();
-  final PagingController<int, CharacterSummary> _pagingController =
-      PagingController(firstPageKey: 0);
+  final PagingController<int, CharacterSummary> _pagingController = PagingController(firstPageKey: 0);
   late StreamSubscription _blocListingStateSubscription;
 
   @override
@@ -29,8 +28,7 @@ class _CharacterSliverGridState extends State<CharacterSliverGrid> {
     // the entire [PagedSliverGrid] every time the state changes.
     // Instead, handling the subscription ourselves and updating only the
     // _pagingController is more efficient.
-    _blocListingStateSubscription =
-        _bloc.onNewListingState.listen((listingState) {
+    _blocListingStateSubscription = _bloc.onNewListingState.listen((listingState) {
       _pagingController.value = PagingState(
         nextPageKey: listingState.nextPageKey,
         error: listingState.error,
@@ -62,15 +60,18 @@ class _CharacterSliverGridState extends State<CharacterSliverGrid> {
               ),
             ),
             bannerFrequency: 3,
-            bannerBuilder: _buildBannerWidget,
+            bannerWidgets: [
+              _buildBannerWidget(context, color: Colors.yellow),
+              _buildBannerWidget(context, color: Colors.blue),
+            ],
             showBannerBetweenGridItems: true,
           ),
         ],
       );
 
-  Widget _buildBannerWidget(BuildContext context) => Container(
+  Widget _buildBannerWidget(BuildContext context, {required Color color}) => Container(
         height: 100,
-        color: Colors.yellow,
+        color: color,
         alignment: Alignment.center,
         child: const Text(
           'Banner',

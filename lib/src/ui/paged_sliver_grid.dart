@@ -28,7 +28,7 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
     this.shrinkWrapFirstPageIndicators = false,
     this.showBannerBetweenGridItems = false,
     this.bannerFrequency = 0,
-    this.bannerBuilder,
+    this.bannerWidgets,
     Key? key,
   }) : super(key: key);
 
@@ -75,7 +75,7 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
   final bool showBannerBetweenGridItems;
 
   /// Show a banner between grid items.
-  final WidgetBuilder? bannerBuilder;
+  final List<Widget>? bannerWidgets;
 
   /// The frequency of the banner.
   final int bannerFrequency;
@@ -101,7 +101,7 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
           addRepaintBoundaries: addRepaintBoundaries,
           showBannerBetweenGridItems: showBannerBetweenGridItems,
           bannerFrequency: bannerFrequency,
-          bannerBuilder: bannerBuilder,
+          bannerWidgets: bannerWidgets,
         ),
         loadingListingBuilder: (
           context,
@@ -151,7 +151,7 @@ class _AppendedSliverGrid extends StatelessWidget {
     this.addSemanticIndexes = true,
     this.showBannerBetweenGridItems = false,
     this.bannerFrequency = 0,
-    this.bannerBuilder,
+    this.bannerWidgets,
     Key? key,
   }) : super(key: key);
 
@@ -164,13 +164,13 @@ class _AppendedSliverGrid extends StatelessWidget {
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
   final bool showBannerBetweenGridItems;
-  final WidgetBuilder? bannerBuilder;
+  final List<Widget>? bannerWidgets;
   final int bannerFrequency;
 
   @override
   Widget build(BuildContext context) {
     if (showBannerBetweenGridItems) {
-      return _buildShowBannerBetweenGridView(context);
+      return _buildBannerGridViewWithBanners(context);
     }
 
     if (showAppendixAsGridChild == true || appendixBuilder == null) {
@@ -193,14 +193,16 @@ class _AppendedSliverGrid extends StatelessWidget {
     }
   }
 
-  Widget _buildShowBannerBetweenGridView(BuildContext context) {
+  Widget _buildBannerGridViewWithBanners(BuildContext context) {
     final items = List<int>.generate(itemCount, (i) => i + 1);
-    final widgets = <Widget>[];
+    final slivers = <Widget>[];
+    final banners = bannerWidgets ?? [];
+    var bannerIndex = 0;
 
     for (var i = 0; i < itemCount; i += bannerFrequency) {
       final endIndex = (i + bannerFrequency < itemCount) ? i + bannerFrequency : itemCount;
       final subList = items.sublist(i, endIndex);
-      widgets.add(
+      slivers.add(
         SliverGrid(
           gridDelegate: gridDelegate,
           delegate: _buildSliverDelegate(
@@ -209,13 +211,14 @@ class _AppendedSliverGrid extends StatelessWidget {
           ),
         ),
       );
-      final bannerWidget = bannerBuilder;
-      if (bannerWidget != null) {
-        widgets.add(SliverToBoxAdapter(child: bannerWidget(context)));
+      if (banners.isNotEmpty) {
+        if (bannerIndex >= banners.length) bannerIndex = 0;
+        slivers.add(SliverToBoxAdapter(child: banners[bannerIndex]));
+        bannerIndex++;
       }
     }
 
-    return MultiSliver(children: widgets);
+    return MultiSliver(children: slivers);
   }
 
   SliverChildBuilderDelegate _buildSliverDelegate({
