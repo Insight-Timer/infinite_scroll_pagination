@@ -36,6 +36,7 @@ class NoConnectionException implements Exception {}
 // ignore: avoid_classes_with_only_static_members
 class _ApiUrlBuilder {
   static const _baseUrl = 'https://api.thecatapi.com/v1/images/search';
+  static const _apiKey = 'live_oUo7bpYXiLUyXgVyacz9IjDqQ5E8Z8uSiU1qKNI4Gs6SQN8zX6PFcbBsJjDiTEcS';
 
   static Uri characterList(
     int offset,
@@ -44,12 +45,10 @@ class _ApiUrlBuilder {
   }) =>
       Uri.parse(
         '$_baseUrl?'
-        'page=$offset'
+        'api_key=$_apiKey'
+        '&page=$offset'
         '&limit=$limit',
       );
-
-  static String _buildSearchTermQuery(String? searchTerm) =>
-      searchTerm != null && searchTerm.isNotEmpty ? '&name=${searchTerm.replaceAll(' ', '+').toLowerCase()}' : '';
 }
 
 extension on Future<http.Response> {
