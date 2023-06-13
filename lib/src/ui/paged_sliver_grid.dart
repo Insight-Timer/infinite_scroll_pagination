@@ -118,6 +118,9 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addSemanticIndexes: addSemanticIndexes,
           addRepaintBoundaries: addRepaintBoundaries,
+          showBannerBetweenGridItems: showBannerBetweenGridItems,
+          bannerFrequency: bannerFrequency,
+          bannerWidgets: bannerWidgets,
         ),
         errorListingBuilder: (
           context,
@@ -134,6 +137,9 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addSemanticIndexes: addSemanticIndexes,
           addRepaintBoundaries: addRepaintBoundaries,
+          showBannerBetweenGridItems: showBannerBetweenGridItems,
+          bannerFrequency: bannerFrequency,
+          bannerWidgets: bannerWidgets,
         ),
         shrinkWrapFirstPageIndicators: shrinkWrapFirstPageIndicators,
       );
@@ -211,11 +217,15 @@ class _AppendedSliverGrid extends StatelessWidget {
           ),
         ),
       );
-      if (banners.isNotEmpty) {
+      if (banners.isNotEmpty && i + bannerFrequency < itemCount) {
         if (bannerIndex >= banners.length) bannerIndex = 0;
         slivers.add(SliverToBoxAdapter(child: banners[bannerIndex]));
         bannerIndex++;
       }
+    }
+
+    if (appendixBuilder != null) {
+      slivers.add(SliverToBoxAdapter(child: appendixBuilder!(context)));
     }
 
     return MultiSliver(children: slivers);
