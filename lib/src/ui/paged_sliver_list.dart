@@ -178,16 +178,19 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
       final delegate = _buildSliverDelegate(
         (context, index) => itemBuilder(context, index + i),
         subList.length,
-        statusIndicatorBuilder: statusIndicatorBuilder,
       );
 
       slivers.add(SliverList(delegate: delegate));
 
-      if (banners.isNotEmpty) {
+      if (banners.isNotEmpty && i + bannerFrequency < itemCount) {
         if (bannerIndex >= banners.length) bannerIndex = 0;
         slivers.add(SliverToBoxAdapter(child: banners[bannerIndex]));
         bannerIndex++;
       }
+    }
+
+    if (statusIndicatorBuilder != null) {
+      slivers.add(SliverToBoxAdapter(child: statusIndicatorBuilder(context)));
     }
 
     return MultiSliver(children: slivers);
