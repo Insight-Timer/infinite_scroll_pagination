@@ -57,8 +57,10 @@ class _CharacterSliverGridState extends State<CharacterSliverGrid> {
             builderDelegate: PagedChildBuilderDelegate<CharacterSummary>(
               itemBuilder: (context, item, index) => CharacterGridItem(
                 character: item,
+                index: index,
               ),
             ),
+            initialBannerIndex: 6,
             bannerFrequency: 3,
             bannerWidgets: [
               _buildBannerWidget(context, color: Colors.yellow),

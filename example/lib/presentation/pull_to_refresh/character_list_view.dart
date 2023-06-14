@@ -50,9 +50,11 @@ class _CharacterListViewState extends State<CharacterListView> {
               animateTransitions: true,
               itemBuilder: (context, item, index) => CharacterListItem(
                 character: item,
+                index: index,
               ),
             ),
             separatorBuilder: (context, index) => const Divider(),
+            initialBannerIndex: 1,
             bannerFrequency: 3,
             bannerWidgets: [
               _buildBannerWidget(context, color: Colors.yellow),

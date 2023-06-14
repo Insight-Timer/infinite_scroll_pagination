@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 class CharacterListItem extends StatelessWidget {
   const CharacterListItem({
     required this.character,
+    this.index = 0,
     Key? key,
   }) : super(key: key);
 
   final CharacterSummary character;
+  final int index;
 
   @override
   Widget build(BuildContext context) => ListTile(
@@ -17,6 +19,6 @@ class CharacterListItem extends StatelessWidget {
           radius: 20,
           backgroundImage: CachedNetworkImageProvider(character.pictureUrl),
         ),
-        title: Text(character.name),
+        title: Text('$index ${character.name}'),
       );
 }

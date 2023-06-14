@@ -29,6 +29,7 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
     this.showBannerBetweenListItems = false,
     this.bannerFrequency = 0,
     this.bannerWidgets,
+    this.initialBannerIndex,
     Key? key,
   })  : _separatorBuilder = null,
         super(key: key);
@@ -46,6 +47,7 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
     this.showBannerBetweenListItems = false,
     this.bannerFrequency = 0,
     this.bannerWidgets,
+    this.initialBannerIndex,
     Key? key,
   })  : _separatorBuilder = separatorBuilder,
         super(key: key);
@@ -85,6 +87,9 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
 
   /// The frequency of the banner.
   final int bannerFrequency;
+
+  /// The index of the first banner.
+  final int? initialBannerIndex;
 
   @override
   Widget build(BuildContext context) => PagedSliverBuilder<PageKeyType, ItemType>(
@@ -171,22 +176,48 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
     final slivers = <Widget>[];
     final banners = bannerWidgets ?? [];
     var bannerIndex = 0;
+    final initialBannerIndex = this.initialBannerIndex;
 
-    for (var i = 0; i < itemCount; i += bannerFrequency) {
-      final endIndex = (i + bannerFrequency < itemCount) ? i + bannerFrequency : itemCount;
-      final subList = items.sublist(i, endIndex);
-      final delegate = _buildSliverDelegate(
-        (context, index) => itemBuilder(context, index + i),
-        subList.length,
-      );
+    // Add initial banner if needed.
+    if (initialBannerIndex != null && initialBannerIndex < itemCount) {
+      final endIndex = initialBannerIndex;
+      final subList = items.sublist(0, endIndex);
+      final delegate = _buildSliverDelegate(itemBuilder, subList.length);
 
       slivers.add(SliverList(delegate: delegate));
 
-      if (banners.isNotEmpty && i + bannerFrequency < itemCount) {
-        if (bannerIndex >= banners.length) bannerIndex = 0;
+      if (banners.isNotEmpty) {
         slivers.add(SliverToBoxAdapter(child: banners[bannerIndex]));
         bannerIndex++;
       }
+
+      itemCount -= endIndex;
+      items.removeRange(0, endIndex);
+    }
+
+    // Add the banners based on the frequency.
+    if (bannerFrequency > 0 && bannerFrequency < itemCount) {
+      for (var bannerFrequencyIndex = 0; bannerFrequencyIndex < itemCount; bannerFrequencyIndex += bannerFrequency) {
+        final endIndex = (bannerFrequencyIndex + bannerFrequency < items.length)
+            ? bannerFrequencyIndex + bannerFrequency
+            : itemCount;
+        final subList = items.sublist(bannerFrequencyIndex, endIndex);
+        final delegate = _buildSliverDelegate(
+          (context, index) => itemBuilder(context, subList[index] - 1),
+          subList.length,
+        );
+
+        slivers.add(SliverList(delegate: delegate));
+
+        if (banners.isNotEmpty && bannerFrequencyIndex + bannerFrequency < items.length) {
+          if (bannerIndex >= banners.length) bannerIndex = 0;
+          slivers.add(SliverToBoxAdapter(child: banners[bannerIndex]));
+          bannerIndex++;
+        }
+      }
+    } else {
+      final delegate = _buildSliverDelegate((context, index) => itemBuilder(context, items[index] - 1), itemCount);
+      slivers.add(SliverList(delegate: delegate));
     }
 
     if (statusIndicatorBuilder != null) {
