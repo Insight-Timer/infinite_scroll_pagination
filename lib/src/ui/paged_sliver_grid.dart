@@ -26,7 +26,7 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
     this.showNewPageErrorIndicatorAsGridChild = true,
     this.showNoMoreItemsIndicatorAsGridChild = true,
     this.shrinkWrapFirstPageIndicators = false,
-    this.showBannerBetweenGridItems = false,
+    this.showBannersBetweenGridRows = false,
     this.bannerFrequency = 0,
     this.bannerWidgets,
     this.initialBannerIndex,
@@ -72,8 +72,8 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
   /// Corresponds to [PagedSliverBuilder.shrinkWrapFirstPageIndicators].
   final bool shrinkWrapFirstPageIndicators;
 
-  /// Whether to show a banner between grid items.
-  final bool showBannerBetweenGridItems;
+  /// Whether to show a banner between grid rows.
+  final bool showBannersBetweenGridRows;
 
   /// Show a banner between grid items.
   final List<Widget>? bannerWidgets;
@@ -103,7 +103,7 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addSemanticIndexes: addSemanticIndexes,
           addRepaintBoundaries: addRepaintBoundaries,
-          showBannerBetweenGridItems: showBannerBetweenGridItems,
+          showBannersBetweenGridRows: showBannersBetweenGridRows,
           bannerFrequency: bannerFrequency,
           bannerWidgets: bannerWidgets,
           initialBannerIndex: initialBannerIndex,
@@ -123,7 +123,7 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addSemanticIndexes: addSemanticIndexes,
           addRepaintBoundaries: addRepaintBoundaries,
-          showBannerBetweenGridItems: showBannerBetweenGridItems,
+          showBannersBetweenGridRows: showBannersBetweenGridRows,
           bannerFrequency: bannerFrequency,
           bannerWidgets: bannerWidgets,
           initialBannerIndex: initialBannerIndex,
@@ -143,7 +143,7 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
           addAutomaticKeepAlives: addAutomaticKeepAlives,
           addSemanticIndexes: addSemanticIndexes,
           addRepaintBoundaries: addRepaintBoundaries,
-          showBannerBetweenGridItems: showBannerBetweenGridItems,
+          showBannersBetweenGridRows: showBannersBetweenGridRows,
           bannerFrequency: bannerFrequency,
           bannerWidgets: bannerWidgets,
           initialBannerIndex: initialBannerIndex,
@@ -162,7 +162,7 @@ class _AppendedSliverGrid extends StatelessWidget {
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
-    this.showBannerBetweenGridItems = false,
+    this.showBannersBetweenGridRows = false,
     this.bannerFrequency = 0,
     this.bannerWidgets,
     this.initialBannerIndex,
@@ -177,14 +177,14 @@ class _AppendedSliverGrid extends StatelessWidget {
   final bool addAutomaticKeepAlives;
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
-  final bool showBannerBetweenGridItems;
+  final bool showBannersBetweenGridRows;
   final List<Widget>? bannerWidgets;
   final int bannerFrequency;
   final int? initialBannerIndex;
 
   @override
   Widget build(BuildContext context) {
-    if (showBannerBetweenGridItems) {
+    if (showBannersBetweenGridRows) {
       return _buildMultipleGridViewWithBanner(context, itemCount);
     }
 

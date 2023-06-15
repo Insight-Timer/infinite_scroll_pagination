@@ -66,7 +66,7 @@ class _CharacterSliverGridState extends State<CharacterSliverGrid> {
               _buildBannerWidget(context, color: Colors.yellow),
               _buildBannerWidget(context, color: Colors.blue),
             ],
-            showBannerBetweenGridItems: true,
+            showBannersBetweenGridRows: true,
           ),
         ],
       );
