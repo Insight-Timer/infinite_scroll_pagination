@@ -5,12 +5,21 @@ import 'package:flutter/material.dart';
 class CharacterGridItem extends StatelessWidget {
   const CharacterGridItem({
     required this.character,
+    required this.index,
     Key? key,
   }) : super(key: key);
   final CharacterSummary character;
+  final int index;
 
   @override
-  Widget build(BuildContext context) => CachedNetworkImage(
-        imageUrl: character.pictureUrl,
-      );
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        CachedNetworkImage(
+          imageUrl: character.pictureUrl,
+        ),
+        Text(index.toString())
+      ],
+    );
+  }
 }
