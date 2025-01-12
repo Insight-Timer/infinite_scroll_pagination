@@ -63,10 +63,10 @@ class PagingState<PageKeyType, ItemType> {
   }
 
   @override
-  int get hashCode => hashValues(
-        itemList.hashCode,
-        error.hashCode,
-        nextPageKey.hashCode,
+  int get hashCode => Object.hash(
+        itemList,
+        error,
+        nextPageKey,
       );
 
   int? get _itemCount => itemList?.length;
