@@ -1,98 +1,174 @@
-## 3.2.0
+## 5.1.1 - 2025-08-28
+### Changed
+- Update example widget usage
 
-* Migrates to Flutter 3.
+### Fixed
+- Null check error in pagedlayoutbuilder
+- Bloc example state equality
+- Paging state hash code
 
-## 3.1.0
+## 5.1.0 - 2025-06-18
+### Added
+- nextIntPageKey convenience getter for int pages starting at 1
+- lastPageIsEmpty convenience getter for APIs which return empty pages when no more data is available
+- flutter bloc example
 
-* Adds [animated status transitions](https://pub.dev/packages/infinite_scroll_pagination/example#animating-status-transitions).
+### Changed
+- Updated migration guide on how to handle final page
 
-## 3.0.1+1
+### Fixed
+- disposing PagingController cancels fetch
 
-* Adds [Flutter Favorite](https://flutter.dev/docs/development/packages-and-plugins/favorites) status to the README.
+## 5.0.0 - 2025-02-24
+### Added
+- `PagingListener` widget to connect a `PagingController` to a `PagedLayoutBuilder`.
 
-## 3.0.1
+### Changed
+- `PagingController` no longer has `addPageRequestListener` method and `firstPageKey` parameter. Use the `fetchPage` parameter of the constructor instead.
+- `PagingController` no longer has the `itemList`, `error`, and `nextPageKey` getters and setters. All values are now stored in `PagingState`.
+- `PagingController` no longer has the `appendPage` and `appendLastPage` methods. Use the `copyWith` method of `PagingState` to update its `pages`, `keys`, and `hasNextPage` fields.
+- `PagingController` no longer has the `retryLastFailedRequest` method. You can simply call `fetchNextPage` to try again.
+- `PagingController` no longer has the `invisibleItemsThreshold` field. It is now configured in `PagedChildBuilderDelegate`.
+- `PagingController` now features getters matching the fields of `PagingState` as well as `mapItems` to modify the items.
+- `PagedLayoutBuilder` no longer accepts `pagingController` as a parameter. It now takes `PagingState` and `fetchNextPage` instead.
+- `PagingState` now uses `pages` (`List<List<ItemType>>`) instead of `itemList` (`List<ItemType>`). A new extension getter `items` is provided for flattening.
+- `PagingState` now features `keys`, a list storing all fetched keys, and `hasNextPage` replacing `nextPageKey`.
+- `PagingState` now includes `isLoading`, which tracks whether a request is in progress.
+- `PagingState` now provides `error` as type `Object?` instead of `dynamic`.
+- `PagingState` now includes `mapItems` and `filterItems` extension methods for modifying items conveniently.
 
-* Fixes code formatting in ListenableListener.
-* Updates [sliver_tools](https://pub.dev/packages/sliver_tools) dependency.
-* Adds new unit tests.
+### Fixed
+- `PagingController` now deduplicates requests.
+- `PagingController` refresh operations now cancel previous requests.
+- Off-by-one error in `invisibleItemsThreshold` calculation.
+- Failure to trigger page request when `invisibleItemsThreshold` is too large.
+- Animating between states with `animateTransitions`.
 
-## 3.0.0
+## 4.1.0 - 2024-11-09
+### Added
+- [PagedSliverMasonryGrid](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedSliverMasonryGrid-class.html).
 
-* Promotes null safety to stable release.
-* Migrates example project to null safety.
-* Migrates code samples to null safety.
+### Changed
+- Updates example.
 
-## 3.0.0-nullsafety.0
+### Removed
+- `pubspec.lock` from version control.
 
-* Migrates to null safety.
+## 4.0.0 - 2023-08-17
+### Added
+- [PagedMasonryGridView](https://pub.dev/documentation/infinite_scroll_pagination/4.0.0/infinite_scroll_pagination/PagedMasonryGridView-class.html).
+- [PagedPageView](https://pub.dev/documentation/infinite_scroll_pagination/4.0.0/infinite_scroll_pagination/PagedPageView-class.html).
+- Support for the box protocol in [PagedLayoutBuilder](https://pub.dev/documentation/infinite_scroll_pagination/4.0.0/infinite_scroll_pagination/PagedLayoutBuilder-class.html).
 
-## 2.3.0
+### Changed
+- Renames `PagedSliverBuilder` to [PagedLayoutBuilder](https://pub.dev/documentation/infinite_scroll_pagination/4.0.0/infinite_scroll_pagination/PagedLayoutBuilder-class.html).
 
-* Adds an [alternative constructor](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController/PagingController.fromValue.html) to [PagingController](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController-class.html) receiving an initial [PagingState](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingState-class.html).
-* Changes Cookbook file name.
-* Updates LICENSE file.
+## 3.2.0 - 2022-05-23
+### Changed
+- Migrates to Flutter 3.
 
-## 2.2.4
+## 3.1.0 - 2021-07-04
+### Added
+- [animated status transitions](https://pub.dev/packages/infinite_scroll_pagination/example#animating-status-transitions).
 
-* Fixes new page requests happening before the end of the current frame.
+## 3.0.1+1 - 2021-05-23
+### Added
+- [Flutter Favorite](https://flutter.dev/docs/development/packages-and-plugins/favorites) status to the README.
 
-## 2.2.3
+## 3.0.1 - 2021-03-08
+### Added
+- New unit tests.
 
-* Fixes a bug in which manually resetting to a previous page would stop requesting subsequent pages.
+### Changed
+- Updates [sliver\_tools](https://pub.dev/packages/sliver_tools) dependency.
 
-## 2.2.2
+### Fixed
+- Code formatting in `ListenableListener`.
 
-* Adds a condition to avoid requesting the first page when there are preloaded items.
+## 3.0.0 - 2021-03-04
+### Changed
+- Promotes null safety to stable release.
+- Migrates example project to null safety.
+- Migrates code samples to null safety.
 
-## 2.2.1
+## 3.0.0-nullsafety.0 - 2021-02-06
+### Changed
+- Migrates to null safety.
 
-* Improves the error message displayed when calling a disposed [PagingController](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController-class.html).
-* Adds `shrinkWrapFirstPageIndicators` property to [PagedSliverList](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedSliverList-class.html), [PagedSliverGrid](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedSliverGrid-class.html) and [PagedSliverBuilder](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedSliverBuilder-class.html).
-* Fixes separator being displayed on completed lists.
+## 2.3.0 - 2021-01-15
+### Added
+- [alternative constructor](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController/PagingController.fromValue.html) to [PagingController](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController-class.html) receiving an initial [PagingState](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingState-class.html).
 
-## 2.2.0+1
+### Changed
+- Cookbook file name.
+- LICENSE file.
 
-* Constraints the Flutter SDK dependency to a minimum version of 1.22.0.
+## 2.2.4 - 2021-01-08
+### Fixed
+- New page requests happening before the end of the current frame.
 
-## 2.2.0
+## 2.2.3 - 2020-12-14
+### Fixed
+- Bug in which manually resetting to a previous page would stop requesting subsequent pages.
 
-* Adds new constructor parameters from [ScrollView](https://api.flutter.dev/flutter/widgets/ScrollView-class.html) to [PagedListView](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedListView-class.html) and [PagedGridView](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedGridView-class.html).
+## 2.2.2 - 2020-11-04
+### Added
+- Condition to avoid requesting the first page when there are preloaded items.
 
-## 2.1.0+1
+## 2.2.1 - 2020-10-21
+### Added
+- `shrinkWrapFirstPageIndicators` property to [PagedSliverList](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedSliverList-class.html), [PagedSliverGrid](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedSliverGrid-class.html), and [PagedSliverBuilder](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedSliverBuilder-class.html).
 
-* Adds link to [raywenderlich.com tutorial](https://www.raywenderlich.com/265121/infinite-scrolling-pagination-in-flutter).
-* Changes examples to async/await.
+### Changed
+- Improve error message displayed when calling a disposed [PagingController](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController-class.html).
 
-## 2.1.0
+### Fixed
+- Separator being displayed on completed lists.
 
-* Adds [noMoreItemsIndicatorBuilder](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedChildBuilderDelegate/noMoreItemsIndicatorBuilder.html) to [PagedChildBuilderDelegate](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedChildBuilderDelegate-class.html).
-* Adds properties to both grid widgets to let you choose whether you want to display the progress, error and completed listing indicators as grid items or if you want to put them below the grid, as is in the list widgets.
+## 2.2.0+1 - 2020-10-19
+### Changed
+- Constraints the Flutter SDK dependency to a minimum version of 1.22.0.
 
-## 2.0.1
+## 2.2.0 - 2020-10-18
+### Added
+- New constructor parameters from [ScrollView](https://api.flutter.dev/flutter/widgets/ScrollView-class.html) to [PagedListView](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedListView-class.html) and [PagedGridView](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedGridView-class.html).
 
-* Fixes [PagingController](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController-class.html) not calling its status listeners.
+## 2.1.0+1 - 2020-10-13
+### Added
+- Link to [raywenderlich.com tutorial](https://www.raywenderlich.com/265121/infinite-scrolling-pagination-in-flutter).
 
-## 2.0.0
+### Changed
+- Examples to async/await.
 
-* **BREAKING CHANGE**: Replaces [PagedDataSource](https://pub.dev/documentation/infinite_scroll_pagination/1.1.1/infinite_scroll_pagination/PagedDataSource-class.html) and [PagedStateChangeListener](https://pub.dev/documentation/infinite_scroll_pagination/1.1.1/infinite_scroll_pagination/PagedStateChangeListener-class.html) with [PagingController](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController-class.html), favoring composition over inheritance.
+## 2.1.0 - 2020-10-10
+### Added
+- [noMoreItemsIndicatorBuilder](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedChildBuilderDelegate/noMoreItemsIndicatorBuilder.html) to [PagedChildBuilderDelegate](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagedChildBuilderDelegate-class.html).
+- Properties to both grid widgets to let you choose whether to display the progress, error, and completed listing indicators as grid items or below the grid, as in the list widgets.
 
-## 1.1.1
+## 2.0.1 - 2020-10-03
+### Fixed
+- [PagingController](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController-class.html) not calling its status listeners.
 
-* Removes scroll from first page progress indicator, first page error indicator and no items found indicator.
+## 2.0.0 - 2020-10-02
+### Changed
+- **BREAKING CHANGE**: Replaces [PagedDataSource](https://pub.dev/documentation/infinite_scroll_pagination/1.1.1/infinite_scroll_pagination/PagedDataSource-class.html) and [PagedStateChangeListener](https://pub.dev/documentation/infinite_scroll_pagination/1.1.1/infinite_scroll_pagination/PagedStateChangeListener-class.html) with [PagingController](https://pub.dev/documentation/infinite_scroll_pagination/latest/infinite_scroll_pagination/PagingController-class.html), favoring composition over inheritance.
 
-## 1.1.0
+## 1.1.1 - 2020-09-23
+### Removed
+- Scroll from first page progress indicator, first page error indicator, and no items found indicator.
 
-* Adds [PagedStateChangeListener](https://pub.dev/documentation/infinite_scroll_pagination/1.1.0/infinite_scroll_pagination/PagedStateChangeListener-class.html).
+## 1.1.0 - 2020-09-18
+### Added
+- [PagedStateChangeListener](https://pub.dev/documentation/infinite_scroll_pagination/1.1.0/infinite_scroll_pagination/PagedStateChangeListener-class.html).
 
-## 1.0.0+2
+## 1.0.0+2 - 2020-08-22
+### Added
+- Documentation to `PagedDataSource` properties.
 
-* Changes README images reference URL.
-* Adds documentation to PagedDataSource properties.
+### Changed
+- README images reference URL.
 
-## 1.0.0+1
-
-* Adds images to README.md.
-
-## 1.0.0
-
-* Initial release.
+## 1.0.0+1 - 2020-08-22
+### Added
+- Images to README.md.
+- Initial release.
