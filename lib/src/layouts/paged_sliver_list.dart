@@ -94,10 +94,12 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
   /// Matches [PagedLayoutBuilder.shrinkWrapFirstPageIndicators].
   final bool shrinkWrapFirstPageIndicators;
 
-  /// Whether to show a banner between list items.
+  /// Whether to show banners between list items.
+  ///
+  /// When true, [itemExtent] and [prototypeItem] are ignored.
   final bool showBannerBetweenListItems;
 
-  /// Show a banner between list items.
+  /// Banners to insert, cycled in order.
   final List<Widget>? bannerWidgets;
 
   /// The frequency of the banner.

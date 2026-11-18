@@ -83,6 +83,33 @@ void main() {
       ]);
     });
 
+    testWidgets('Separated: places separators only between items of a segment',
+        (tester) async {
+      tester.applyPreferredTestScreenSize();
+
+      await _pumpList(
+        tester,
+        state: TestPagingState.ongoing(n: 5),
+        initialBannerIndex: 1,
+        bannerFrequency: 2,
+        progressText: 'Loading',
+        separated: true,
+      );
+
+      expect(_textsInVisualOrder(tester), [
+        'Item 1',
+        'Banner A',
+        'Item 2',
+        'Separator',
+        'Item 3',
+        'Banner B',
+        'Item 4',
+        'Separator',
+        'Item 5',
+        'Loading',
+      ]);
+    });
+
     testWidgets('Renders no banners when disabled', (tester) async {
       tester.applyPreferredTestScreenSize();
 
@@ -190,21 +217,37 @@ Future<void> _pumpList(
   int? initialBannerIndex,
   bool showBanners = true,
   String? progressText,
+  bool separated = false,
 }) =>
     tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           body: CustomScrollView(
             slivers: [
-              PagedSliverList<int, String>(
-                state: state,
-                fetchNextPage: () {},
-                builderDelegate: _builderDelegate(progressText),
-                showBannerBetweenListItems: showBanners,
-                bannerFrequency: bannerFrequency,
-                initialBannerIndex: initialBannerIndex,
-                bannerWidgets: _bannerWidgets,
-              ),
+              if (separated)
+                PagedSliverList<int, String>.separated(
+                  state: state,
+                  fetchNextPage: () {},
+                  builderDelegate: _builderDelegate(progressText),
+                  separatorBuilder: (_, __) => const SizedBox(
+                    height: _tileHeight,
+                    child: Text('Separator'),
+                  ),
+                  showBannerBetweenListItems: showBanners,
+                  bannerFrequency: bannerFrequency,
+                  initialBannerIndex: initialBannerIndex,
+                  bannerWidgets: _bannerWidgets,
+                )
+              else
+                PagedSliverList<int, String>(
+                  state: state,
+                  fetchNextPage: () {},
+                  builderDelegate: _builderDelegate(progressText),
+                  showBannerBetweenListItems: showBanners,
+                  bannerFrequency: bannerFrequency,
+                  initialBannerIndex: initialBannerIndex,
+                  bannerWidgets: _bannerWidgets,
+                ),
             ],
           ),
         ),

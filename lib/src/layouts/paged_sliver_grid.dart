@@ -76,10 +76,13 @@ class PagedSliverGrid<PageKeyType, ItemType> extends StatelessWidget {
   /// Matches [PagedLayoutBuilder.shrinkWrapFirstPageIndicators].
   final bool shrinkWrapFirstPageIndicators;
 
-  /// Whether to show a banner between grid rows.
+  /// Whether to show banners between grid rows.
+  ///
+  /// When true, the status indicators always span the full width and the
+  /// `show*IndicatorAsGridChild` options are ignored.
   final bool showBannersBetweenGridRows;
 
-  /// Show a banner between grid items.
+  /// Banners to insert, cycled in order.
   final List<Widget>? bannerWidgets;
 
   /// The frequency of the banner.
