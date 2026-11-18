@@ -110,6 +110,23 @@ void main() {
       ]);
     });
 
+    testWidgets('Applies itemExtent to every segment', (tester) async {
+      tester.applyPreferredTestScreenSize();
+
+      await _pumpList(
+        tester,
+        state: TestPagingState.completed(n: 4),
+        bannerFrequency: 2,
+        itemExtent: 30,
+      );
+
+      expect(find.byType(SliverFixedExtentList), findsNWidgets(2));
+      expect(tester.getTopLeft(find.text('Item 2')).dy, 30);
+      expect(tester.getTopLeft(find.text('Banner A')).dy, 60);
+      expect(tester.getTopLeft(find.text('Item 3')).dy, 80);
+      expect(tester.getTopLeft(find.text('Item 4')).dy, 110);
+    });
+
     testWidgets('Renders no banners when disabled', (tester) async {
       tester.applyPreferredTestScreenSize();
 
@@ -218,6 +235,7 @@ Future<void> _pumpList(
   bool showBanners = true,
   String? progressText,
   bool separated = false,
+  double? itemExtent,
 }) =>
     tester.pumpWidget(
       MaterialApp(
@@ -243,6 +261,7 @@ Future<void> _pumpList(
                   state: state,
                   fetchNextPage: () {},
                   builderDelegate: _builderDelegate(progressText),
+                  itemExtent: itemExtent,
                   showBannerBetweenListItems: showBanners,
                   bannerFrequency: bannerFrequency,
                   initialBannerIndex: initialBannerIndex,

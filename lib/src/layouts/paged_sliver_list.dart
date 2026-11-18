@@ -95,8 +95,6 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
   final bool shrinkWrapFirstPageIndicators;
 
   /// Whether to show banners between list items.
-  ///
-  /// When true, [itemExtent] and [prototypeItem] are ignored.
   final bool showBannerBetweenListItems;
 
   /// Banners to insert, cycled in order.
@@ -164,9 +162,8 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
       return BannerSlivers(
         itemBuilder: itemBuilder,
         itemCount: itemCount,
-        segmentBuilder: (itemBuilder, itemCount) => SliverList(
-          delegate: _buildSliverDelegate(itemBuilder, itemCount),
-        ),
+        segmentBuilder: (itemBuilder, itemCount) =>
+            _buildSliver(_buildSliverDelegate(itemBuilder, itemCount)),
         bannerWidgets: bannerWidgets,
         bannerFrequency: bannerFrequency,
         initialBannerIndex: initialBannerIndex,
@@ -174,12 +171,16 @@ class PagedSliverList<PageKeyType, ItemType> extends StatelessWidget {
       );
     }
 
-    final delegate = _buildSliverDelegate(
-      itemBuilder,
-      itemCount,
-      statusIndicatorBuilder: statusIndicatorBuilder,
+    return _buildSliver(
+      _buildSliverDelegate(
+        itemBuilder,
+        itemCount,
+        statusIndicatorBuilder: statusIndicatorBuilder,
+      ),
     );
+  }
 
+  Widget _buildSliver(SliverChildBuilderDelegate delegate) {
     final itemExtent = this.itemExtent;
 
     return ((itemExtent == null && prototypeItem == null) ||
