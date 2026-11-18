@@ -1,0 +1,117 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:134.0) Gecko/20100101 Firefox/134.0" version="26.0.4">
+  <diagram name="Page-1" id="Ja0PciWwKuc3zwULVUes">
+    <mxGraphModel dx="2231" dy="769" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zON4cZR-th5vNAXBoz-4-19" value="" style="group;fillColor=#FFFFFF;rounded=1;arcSize=2;container=0;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="360" y="580" width="740" height="940" as="geometry" />
+        </mxCell>
+        <mxCell id="zON4cZR-th5vNAXBoz-4-29" value="" style="group;fillColor=#DF6762;strokeColor=none;gradientColor=none;rounded=1;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="385" y="1388.2" width="690" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="zON4cZR-th5vNAXBoz-4-30" value="PagedLayoutBuilder" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;fontStyle=1;fontFamily=Tahoma;" parent="zON4cZR-th5vNAXBoz-4-29" vertex="1">
+          <mxGeometry x="230.45999999999998" y="11" width="229.08841463414632" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="zON4cZR-th5vNAXBoz-4-31" value="&lt;div&gt;The template widget for all other Paged widgets.&amp;nbsp;&lt;/div&gt;&lt;div&gt;Use this directly if you need maximum customisation or are implementing a new upper level widget.&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;labelPosition=center;verticalLabelPosition=middle;fontFamily=Tahoma;" parent="zON4cZR-th5vNAXBoz-4-29" vertex="1">
+          <mxGeometry y="40" width="690" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="zON4cZR-th5vNAXBoz-4-34" value="" style="endArrow=none;dashed=1;html=1;dashPattern=12 12;strokeWidth=2;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="1340" as="sourcePoint" />
+            <mxPoint x="1100" y="1340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zON4cZR-th5vNAXBoz-4-20" value="Agnocstic Level" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="965" y="1350" width="110" height="28.2" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-8" value="" style="group;fillColor=light-dark(#32B532,#32B532);strokeColor=none;gradientColor=none;rounded=1;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="385" y="1198.2" width="690" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-9" value="Paged Sliver Layouts" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;fontStyle=1;fontFamily=Tahoma;" vertex="1" parent="D8TTvcLzMSSEc06iLjWL-8">
+          <mxGeometry x="230.45999999999998" y="11" width="229.08841463414632" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="D8TTvcLzMSSEc06iLjWL-8" source="D8TTvcLzMSSEc06iLjWL-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="345" y="191.80000000000018" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-10" value="&lt;div&gt;PagedSliverList and PagedSliverGrid as well as custom implementations provide scroll aware pagination&amp;nbsp;&lt;/div&gt;&lt;div&gt;that can be combined with CustomScrollView to create powerful and complex layouts.&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;labelPosition=center;verticalLabelPosition=middle;fontFamily=Tahoma;" vertex="1" parent="D8TTvcLzMSSEc06iLjWL-8">
+          <mxGeometry y="40" width="690" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-11" value="" style="endArrow=none;dashed=1;html=1;dashPattern=12 12;strokeWidth=2;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="1150" as="sourcePoint" />
+            <mxPoint x="1100" y="1150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-12" value="Sliver Level" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="965" y="1160" width="110" height="28.2" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-13" value="" style="group;fillColor=light-dark(#A766E9,#A766E9);strokeColor=none;gradientColor=none;rounded=1;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="385" y="1008.2" width="690" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-14" value="Paged Box Layouts" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;fontStyle=1;fontFamily=Tahoma;" vertex="1" parent="D8TTvcLzMSSEc06iLjWL-13">
+          <mxGeometry x="230.45999999999998" y="11" width="229.08841463414632" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="D8TTvcLzMSSEc06iLjWL-13" source="D8TTvcLzMSSEc06iLjWL-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="345" y="191.79999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-15" value="&lt;div&gt;PagedListView, PagedGridView, PagedPageView and custom implementations provide&lt;/div&gt;&lt;div&gt;out of the box scrollable and paginated widgets for easy usage.&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;labelPosition=center;verticalLabelPosition=middle;fontFamily=Tahoma;" vertex="1" parent="D8TTvcLzMSSEc06iLjWL-13">
+          <mxGeometry y="40" width="690" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-16" value="" style="endArrow=none;dashed=1;html=1;dashPattern=12 12;strokeWidth=2;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="960" as="sourcePoint" />
+            <mxPoint x="1100" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-17" value="Box Level" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="965" y="970" width="110" height="28.2" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-20" value="" style="group;fillColor=light-dark(#5A76E9,#5A76E9);strokeColor=none;gradientColor=none;rounded=1;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="385" y="818.2" width="690" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-21" value="State and fetchNextPage" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;fontStyle=1;fontFamily=Tahoma;" vertex="1" parent="D8TTvcLzMSSEc06iLjWL-20">
+          <mxGeometry x="130" y="11" width="430" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="D8TTvcLzMSSEc06iLjWL-20" source="D8TTvcLzMSSEc06iLjWL-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="345" y="191.79999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-23" value="&lt;div&gt;Paged Widgets are controlled with a PagingState object and a NextPageCallback function.&lt;/div&gt;&lt;div&gt;You can store this state and function in any state managment solution you wish, and then pass it to the Widget. This lets you use your favorite state managment easily.&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;labelPosition=center;verticalLabelPosition=middle;fontFamily=Tahoma;" vertex="1" parent="D8TTvcLzMSSEc06iLjWL-20">
+          <mxGeometry y="40" width="690" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-24" value="" style="endArrow=none;dashed=1;html=1;dashPattern=12 12;strokeWidth=2;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="770" as="sourcePoint" />
+            <mxPoint x="1100" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-25" value="State Level" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="965" y="780" width="110" height="28.2" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-26" value="" style="group;fillColor=light-dark(#D1B85A,#D1B85A);strokeColor=none;gradientColor=none;rounded=1;" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="385" y="628.2" width="690" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-27" value="PagingController and PagingListener" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;fontStyle=1;fontFamily=Tahoma;" vertex="1" parent="D8TTvcLzMSSEc06iLjWL-26">
+          <mxGeometry x="130" y="11" width="430" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="D8TTvcLzMSSEc06iLjWL-26" source="D8TTvcLzMSSEc06iLjWL-29">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="345" y="191.79999999999995" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-29" value="&lt;div&gt;For ease-of-use, you can use the inbuilt PagingController and PagingListener with your Paged Widget.&lt;/div&gt;&lt;div&gt;It will automatically hold your state and update all your connected Paged Widgets,&amp;nbsp;&lt;/div&gt;&lt;div&gt;as well as deduplicate calls for the next page.&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;labelPosition=center;verticalLabelPosition=middle;fontFamily=Tahoma;" vertex="1" parent="D8TTvcLzMSSEc06iLjWL-26">
+          <mxGeometry y="40" width="690" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="D8TTvcLzMSSEc06iLjWL-31" value="Controller Level" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="965" y="590" width="110" height="28.2" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
